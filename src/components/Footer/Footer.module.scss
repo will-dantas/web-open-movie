@@ -1,0 +1,24 @@
+.footerContainer {
+  margin-top: 10rem;
+  background: var(--gray-850);
+  padding: 2rem;
+  border-top: 1px solid var(--yellow-500);
+}
+
+.footerContent {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    filter: grayscale(1);
+  }
+
+  .headerName {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: #fff
+  }
+}

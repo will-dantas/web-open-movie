@@ -23,8 +23,9 @@ export const SearchSection = ({ onSubmit, onReset }: ISearchSection) => {
         value={searchTerm}
         onInput={(event: any) => handleOnSubmit(event.target.valueBeforeItemPreview)}
       />
-      <div>
+      <div className={styles.conteinerButton}>
         <Button
+          typeof='submit'
           className={styles.buttonSearch}
           onClick={() => onSubmit(searchTerm)}
         >

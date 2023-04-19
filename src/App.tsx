@@ -9,7 +9,10 @@ import { MovieDetailsService } from './services/MovieDetailsService/MovieDetails
 import { DatailsSearchService } from './services/DatailsSearchService/DatailsSearchService';
 import { IDatailsSearch } from './@types/DatailsSearchService.interface';
 import { ToastComponent } from './components/ToastComponent/ToastComponent';
+import { Footer } from './components/Footer/Footer';
 import '../src/styles/global.scss';
+import { useDispatch } from 'react-redux';
+import { selectMoviesDetails } from './features/movie-datails/movie-details-slice';
 
 function App() {
   const [datailsSearch, setDatailsSearch] = useState<IDatailsSearch[]>();
@@ -17,6 +20,8 @@ function App() {
   const [messageToast, setMessageToast] = useState('');
   const [loading, setLoading] = useState(false);
   const toast = useRef<any>(null);
+
+  const dispatch = useDispatch() 
 
   const showToast = () => {
     toast.current.show();
@@ -26,15 +31,17 @@ function App() {
     if (searchTerm === undefined) {
       return;
     }
-    
+
     const movieId = searchTerm.map((datails) => {
       return datails.imdbID;
     });
 
     await new MovieDetailsService().execute(movieId[0])
       .then((response: any) => {
-        setLoading(false);
         setMovieDetails(response.data);
+        setLoading(false);
+        
+        handleDispatch();
       }).catch((error: any) => {
         console.log(error);
         setMessageToast('Informação do filme não encontradas!');
@@ -47,8 +54,6 @@ function App() {
       .then((response: any) => {
         setLoading(true);
         setDatailsSearch(response.data);
-
-        handleMovieDetails(datailsSearch);
       }).catch((error: any) => {
         console.log(error);
         setMessageToast('Filme não encontrado :(')
@@ -62,13 +67,23 @@ function App() {
       showToast();
       return;
     }
+
     handleDatailsSearch(searchTerm);
+  }
+
+  const handleDispatch = async () => {
+    await dispatch(selectMoviesDetails(movieDetails));
   }
 
   function handleReset() {
     setMovieDetails(null);
-  }
+  };
 
+  useEffect(() => {
+    handleMovieDetails(datailsSearch);
+  }, [datailsSearch]);
+
+  console.log(movieDetails);
   return (
     <ThemeProvider>
       <Header />
@@ -77,10 +92,14 @@ function App() {
         onSubmit={handleOnSeachTerm}
         onReset={handleReset}
       />
-      <ContentSection
-        movieDetails={movieDetails}
-        loading={loading}
-      />
+      { 
+        movieDetails &&
+        <ContentSection
+          movieDetails={movieDetails}
+          loading={loading}
+        />
+      }
+      <Footer />
       <ToastComponent toast={toast} message={messageToast} />
     </ThemeProvider>
   )

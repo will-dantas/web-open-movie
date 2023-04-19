@@ -1,11 +1,9 @@
 import { Toast } from "@ui5/webcomponents-react";
 import { IToastComponent } from "./ToastComponent.interface";
-import styles from './ToastComponent.module.scss';
 
 export const ToastComponent = ({ message, toast }: IToastComponent) => {
   return (
     <Toast
-      className={styles.toastContainer}
       style={{
         fontSize: '14px',
         fontWeight: 'bold',

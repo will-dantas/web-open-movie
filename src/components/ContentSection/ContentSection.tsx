@@ -1,8 +1,12 @@
-import { Loader, RatingIndicator } from '@ui5/webcomponents-react';
+import { Button, Loader, RatingIndicator } from '@ui5/webcomponents-react';
 import styles from './ContentSection.module.scss';
 import { IMovieDetailsContent } from './ContentSection.interface';
+// import { useSelector } from 'react-redux';
+// import { selectMoviesDetails } from '../../features/movie-datails/movie-details-slice';
 
 export const ContentSection = ({ movieDetails, loading }: IMovieDetailsContent) => {
+  // const stateMovieDetails = useSelector(selectMoviesDetails);
+
   const calcRaiting = (raiting: string | undefined) => {
     const result = ((Number(raiting) * 5) / 10);
     return result;
@@ -42,6 +46,15 @@ export const ContentSection = ({ movieDetails, loading }: IMovieDetailsContent) 
             />
             <p>{calcRaiting(movieDetails?.imdbRating)}</p>
           </div>
+          <div className={styles.raiting}>
+            <Button
+              typeof='submit'
+              className={styles.buttonFavorite}
+            >
+              Favoritos 🧡
+            </Button>
+          </div>
+
         </div>
       </div>
       <div className={styles.imagePoster}>
