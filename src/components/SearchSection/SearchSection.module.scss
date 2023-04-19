@@ -1,0 +1,57 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+}
+
+.imputUI {
+  width: 400px;
+  height: 40px;
+  font-size: large;
+  color: var(--white);
+  background: var(--gray-800);
+  border: 2px solid var(--yellow-500);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+
+  &:focus {
+    background: var(--gray-100);
+    transition: 0.5s;
+    color: #000;
+  }
+}
+
+.buttonSearch {
+  width: 100px;
+  height: 40px;
+  font-size: medium;
+  color: #000;
+  background: var(--cyan-500);
+  border: 2px solid var(--gray-300);
+  border-radius: 5px;
+  margin-right: 1rem;
+
+  &:hover {
+    background: var(--yellow-500);
+    transition: 0.5s;
+  }
+}
+
+.buttonReset {
+  width: 100px;
+  height: 40px;
+  font-size: medium;
+  color: #000;
+  background: #fff;
+  border: 2px solid var(--gray-300);
+  border-radius: 5px;
+
+  &:hover {
+    background: var(--yellow-500);
+    transition: 0.5s;
+  }
+}
