@@ -40,7 +40,7 @@ function App() {
       .then((response: any) => {
         setMovieDetails(response.data);
         setLoading(false);
-        
+
         handleDispatch();
       }).catch((error: any) => {
         console.log(error);
@@ -83,7 +83,6 @@ function App() {
     handleMovieDetails(datailsSearch);
   }, [datailsSearch]);
 
-  console.log(movieDetails);
   return (
     <ThemeProvider>
       <Header />
